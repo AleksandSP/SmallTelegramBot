@@ -16,23 +16,23 @@ myid=YOUR_ID
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
     if((message.chat.type=="group") or (message.chat.type=="supergroup")) :
-        uniq(str(message.chat.id))
-    if(message.chat.id==myid):
+        uniq(message.chat.id)
+    if((message.chat.id==myid)or(message.chat.id==myid1)):
         f = open('text.txt', 'r')
         for IdGroup in f:
             chat_id=IdGroup
             bot.forward_message(chat_id,message.chat.id,message.message_id)
-            print(chat_id+" /n")
 
 def uniq(id) :
     f = open('text.txt', 'r')
     for IdGroup in f:
+        IdGroup=int(IdGroup)
         if (IdGroup==id) :
             id="1"
     f.close()
     if(id!="1"):
         f = open('text.txt', 'a')
-        f.write(id+ '\n')
+        f.write(str(id)+ '\n')
         f.close()
 #with open('text.txt') as result:
 #uniqlines = set(result.readlines())
